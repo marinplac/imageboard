@@ -31,9 +31,24 @@ app.use(express.static("public"));
 
 app.post("/upload", uploader.single("file"), s3.upload, function(req, res) {
     console.log("req.file: ", req.file.filename);
+    console.log(req.body);
 
     if (req.file) {
         const url = config.s3Url + req.file.filename;
+        db.putInTable(
+            url,
+            req.body.username,
+            req.body.title,
+            req.body.description
+            // Date.now()
+        )
+            .then(data => {
+                req.file = data.rows[0].id;
+            })
+            .catch(err => {
+                console.log("err in putInTable:", err);
+            });
+
         res.json({
             success: true,
             url

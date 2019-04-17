@@ -1,9 +1,10 @@
 * {
     background-color: #b5cfd8;
+    font-family: "VT323", monospace;
 }
 p {
-    display: run-in;
-    font-family: "Rhodium Libre", serif;
+    /* display: run-in; */
+    /* font-family: "Rhodium Libre", serif; */
     font-size: 40px;
     font-weight: bold;
     color: #6c737e;
@@ -11,12 +12,12 @@ p {
 .container {
     display: flex;
     justify-content: space-between;
-    font-family: "Rhodium Libre", serif;
+    /* font-family: "Rhodium Libre", serif; */
     color: #6c737e;
     overflow: hidden;
 }
 form {
-    font-family: "Rhodium Libre", serif;
+    /* font-family: "Rhodium Libre", serif; */
     color: #6c737e;
     display: flex;
     justify-content: flex-start;
@@ -41,7 +42,7 @@ img {
 button {
     width: 80px;
     height: 50px;
-    font-family: "Rhodium Libre", serif;
+    /* font-family: "Rhodium Libre", serif; */
     border: solid #6c737e;
     border-radius: 15px;
     font-weight: bold;
