@@ -21,18 +21,25 @@
         </form>
 
         <div class="container">
-            <div class="image-container" v-if="images.length" v-for="image in images">
+            <div class="image-container" v-if="images.length" v-for="image in images" @click="openModal(image.id)">
                 <img :src="image.url" :alt="image.title">
                 <div>{{image.title}}</div>
             </div>
 
         </div>
 
+        <image-modal :id="currentimage"></image-modal>
 
-
-
+<!-- v-if="currentimage" -->
 
       </div>
+
+      <script id="modal" type="text/x-template">
+          <div>
+              <h1>Hello!</h1>
+
+          </div>
+      </script>
 
     <script src="/js/vue.js"></script>
     <script src="/js/axios.min.js"></script>

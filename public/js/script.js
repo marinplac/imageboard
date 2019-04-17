@@ -1,7 +1,29 @@
 (function() {
+    Vue.component("image-modal", {
+        props: ["id"],
+        data: function() {
+            return {
+                imagedata: ""
+            };
+        },
+        mounted: function() {
+            // console.log("a string!", this);
+        },
+        methods: {},
+        template: `#modal`,
+        watch: {
+            id: function() {
+                axios.get("/image/" + this.id).then(function(data) {
+                    console.log(data);
+                });
+            }
+        }
+    });
+
     new Vue({
         el: "#main",
         data: {
+            currentimage: null,
             images: [],
             form: {
                 title: "",
@@ -20,6 +42,10 @@
         //every single funct that runs in response to an event
         //is defined in "methods"
         methods: {
+            openModal: function(id) {
+                // console.log(id);
+                this.currentimage = id;
+            },
             handleFileChange: function(evt) {
                 console.log("file: ", evt.target.files[0]);
                 //this stores the file that was just selected

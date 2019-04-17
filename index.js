@@ -71,6 +71,14 @@ app.get("/imageboard", function(res) {
     app.images = res.data;
 });
 
+app.get("/image/:id", function(req, res) {
+    console.log(req.params.id);
+    db.getPicId(req.params.id).then(({ data }) => {
+        // console.log(data);
+        res.json(data);
+    });
+});
+
 app.listen(8080, () => {
     console.log("I am listening to your blabber!");
 });

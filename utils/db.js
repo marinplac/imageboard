@@ -12,3 +12,8 @@ exports.putInTable = function putInTable(url, username, title, description) {
     let params = [url, username, title, description];
     return db.query(q, params);
 };
+exports.getPicId = function getPicId(id) {
+    let q = `SELECT * FROM images WHERE $1 = id `;
+    let params = [id];
+    return db.query(q, params);
+};
