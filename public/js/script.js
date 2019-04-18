@@ -8,6 +8,7 @@
                 commform: {
                     comment: "",
                     username: ""
+                    // created_at: Date.now()
                 }
             };
         },
@@ -27,11 +28,9 @@
                     username: this.commform.username,
                     image_id: this.id,
                     comment: this.commform.comment
+                    // created_at: Date.now() //brisi ovo ako ne radi
                 };
-                // var username = ;
-                // var image_id = this.id;
-                // console.log("this image id", image_id);
-                // var comment = this.commform.comment;
+
                 axios.post("/newcomment", allParm).then(function(res) {
                     console.log("good tag for res", res);
                 });

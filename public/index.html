@@ -45,9 +45,13 @@
               <input type="text" name="username" v-model="commform.username">username</input>
               <button @click.stop.prevent="newComm">submit</button>
           </form>
-              <div>comments</div>
+              <div><p>comments</p>
+                  <div>{{commform.comment}}</div>
+                  <div>{{commform.username}} on {{commform.created_at}}</div>
 
-              <!-- {{imagedetails.description}} {{imagedetails.username}} {{imagedetails.id}} -->
+                </div>
+
+
 
           </div>
       </script>

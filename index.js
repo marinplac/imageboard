@@ -84,13 +84,15 @@ app.get("/comment/:id", function(req, res) {
     });
 });
 app.post("/newcomment", function(req, res) {
-    // let username, image_id, comment;
-    db.newComm(req.body.username, req.body.image_id, req.body.comment).then(
-        ({ rows }) => {
-            console.log(rows[0]);
-            res.json(rows[0]);
-        }
-    );
+    db.newComm(
+        req.body.username,
+        req.body.image_id,
+        req.body.comment
+        // req.body.created_at
+    ).then(({ rows }) => {
+        console.log(rows[0]);
+        res.json(rows[0]);
+    });
 });
 
 app.listen(8080, () => {
