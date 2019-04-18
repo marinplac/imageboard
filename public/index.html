@@ -28,15 +28,26 @@
 
         </div>
 
-        <image-modal :id="currentimage"></image-modal>
+        <image-modal v-if="currentimage" :id="currentimage"></image-modal>
 
-<!-- v-if="currentimage" -->
-
-      </div>
+            </div>
 
       <script id="modal" type="text/x-template">
-          <div>
-              <h1>Hello!</h1>
+          <div class="modalcontainer">
+              <img :src="imagedetails.url" :alt="imagedetails.title">
+              <div>{{imagedetails.title}}</div>
+              <div>{{imagedetails.description}}</div>
+              <div>Uploaded by {{imagedetails.username}} on {{imagedetails.created_at}}</div>
+
+              <form>
+              <input type="text" name="comment" v-model="commform.comment">comment</input>
+
+              <input type="text" name="username" v-model="commform.username">username</input>
+              <button @click.stop.prevent="newComm">submit</button>
+          </form>
+              <div>comments</div>
+
+              <!-- {{imagedetails.description}} {{imagedetails.username}} {{imagedetails.id}} -->
 
           </div>
       </script>

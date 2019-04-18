@@ -3,18 +3,49 @@
         props: ["id"],
         data: function() {
             return {
-                imagedata: ""
+                imagedata: "",
+                imagedetails: [],
+                commform: {
+                    comment: "",
+                    username: ""
+                }
             };
         },
         mounted: function() {
-            // console.log("a string!", this);
+            let self = this;
+            axios.get("/image/" + self.id).then(function(res) {
+                console.log(res);
+                self.imagedetails = res.data[0];
+            });
+            axios.get("/comment/" + this.id).then(function(res) {
+                this.comment = res.data;
+            });
         },
-        methods: {},
+        methods: {
+            newComm: function() {
+                var allParm = {
+                    username: this.commform.username,
+                    image_id: this.id,
+                    comment: this.commform.comment
+                };
+                // var username = ;
+                // var image_id = this.id;
+                // console.log("this image id", image_id);
+                // var comment = this.commform.comment;
+                axios.post("/newcomment", allParm).then(function(res) {
+                    console.log("good tag for res", res);
+                });
+            }
+        },
         template: `#modal`,
+        //the watchers
         watch: {
             id: function() {
-                axios.get("/image/" + this.id).then(function(data) {
-                    console.log(data);
+                let self = this;
+                axios.get("/image/" + this.id).then(function(res) {
+                    // console.log(data, "the image id changed!");
+                    self.imagedetails = res.data;
+                    // this.item = data[0];
                 });
             }
         }
@@ -23,7 +54,7 @@
     new Vue({
         el: "#main",
         data: {
-            currentimage: null,
+            currentimage: 0,
             images: [],
             form: {
                 title: "",
@@ -33,14 +64,13 @@
             }
         },
         mounted: function() {
-            var app = this;
+            var self = this;
             axios.get("/imageboard").then(function(res) {
-                app.images = res.data;
+                self.images = res.data;
                 console.log("responded data", res.data);
             });
         },
-        //every single funct that runs in response to an event
-        //is defined in "methods"
+
         methods: {
             openModal: function(id) {
                 // console.log(id);

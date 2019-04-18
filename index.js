@@ -73,10 +73,24 @@ app.get("/imageboard", function(res) {
 
 app.get("/image/:id", function(req, res) {
     console.log(req.params.id);
-    db.getPicId(req.params.id).then(({ data }) => {
-        // console.log(data);
-        res.json(data);
+    db.getPicId(req.params.id).then(({ rows }) => {
+        console.log(rows);
+        res.json(rows);
     });
+});
+app.get("/comment/:id", function(req, res) {
+    db.getComm(req.params.id).then(({ rows }) => {
+        res.json(rows);
+    });
+});
+app.post("/newcomment", function(req, res) {
+    // let username, image_id, comment;
+    db.newComm(req.body.username, req.body.image_id, req.body.comment).then(
+        ({ rows }) => {
+            console.log(rows[0]);
+            res.json(rows[0]);
+        }
+    );
 });
 
 app.listen(8080, () => {

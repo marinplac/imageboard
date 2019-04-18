@@ -17,3 +17,13 @@ exports.getPicId = function getPicId(id) {
     let params = [id];
     return db.query(q, params);
 };
+exports.getComm = function getComm(image_id) {
+    let q = `SELECT * FROM comments WHERE image_id=$1`;
+    let params = [image_id];
+    return db.query(q, params);
+};
+exports.newComm = function newComm(username, image_id, comment) {
+    let q = `INSERT INTO comments (username, image_id, comment) VALUES ($1, $2, $3) RETURNING *`;
+    let params = [username, image_id, comment];
+    return db.query(q, params);
+};

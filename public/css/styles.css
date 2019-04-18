@@ -3,21 +3,19 @@
     font-family: "VT323", monospace;
 }
 p {
-    /* display: run-in; */
-    /* font-family: "Rhodium Libre", serif; */
     font-size: 40px;
     font-weight: bold;
     color: #6c737e;
 }
 .container {
     display: flex;
-    justify-content: space-between;
-    /* font-family: "Rhodium Libre", serif; */
+    justify-content: space-around;
+    flex-wrap: wrap;
+
     color: #6c737e;
     overflow: hidden;
 }
 form {
-    /* font-family: "Rhodium Libre", serif; */
     color: #6c737e;
     display: flex;
     justify-content: flex-start;
@@ -30,12 +28,9 @@ img {
 }
 .image-container {
     border: solid #6c737e;
+    margin: 20px;
 }
-/* input {
-    width: 150px;
-    height: 30px;
-    border: solid #6c737e;
-} */
+
 #uploadfield {
 }
 
@@ -48,4 +43,12 @@ button {
     font-weight: bold;
     color: #6c737e;
     background-color: #7393a7;
+}
+.modalcontainer {
+    width: 500px;
+    height: 500px;
+    border: solid #6c737e;
+    margin: 20px;
+    font-size: 15px;
+    color: #6c737e;
 }
