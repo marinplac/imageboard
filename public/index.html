@@ -28,12 +28,14 @@
 
         </div>
 
-        <image-modal v-if="currentimage" :id="currentimage"></image-modal>
+        <image-modal v-if="currentimage" :id="currentimage" @close="closeModal"></image-modal>
+
 
             </div>
 
       <script id="modal" type="text/x-template">
           <div class="modalcontainer">
+              <button class="button" @click="close"> X </button>
               <img :src="imagedetails.url" :alt="imagedetails.title">
               <div>{{imagedetails.title}}</div>
               <div>{{imagedetails.description}}</div>

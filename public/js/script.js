@@ -5,6 +5,8 @@
             return {
                 imagedata: "",
                 imagedetails: [],
+                created_at: "",
+                commforms: [],
                 commform: {
                     comment: "",
                     username: ""
@@ -23,16 +25,21 @@
             });
         },
         methods: {
+            close: function() {
+                this.$emit("close");
+            },
             newComm: function() {
+                let self = this;
                 var allParm = {
-                    username: this.commform.username,
-                    image_id: this.id,
-                    comment: this.commform.comment
+                    username: self.commform.username,
+                    image_id: self.id,
+                    comment: self.commform.comment
                     // created_at: Date.now() //brisi ovo ako ne radi
                 };
 
                 axios.post("/newcomment", allParm).then(function(res) {
                     console.log("good tag for res", res);
+                    self.commforms.unshift(res.data[0]);
                 });
             }
         },
@@ -43,8 +50,12 @@
                 let self = this;
                 axios.get("/image/" + this.id).then(function(res) {
                     // console.log(data, "the image id changed!");
+
                     self.imagedetails = res.data;
                     // this.item = data[0];
+                });
+                axios.get("/comment/" + this.id).then(function(res) {
+                    this.comment = res.data;
                 });
             }
         }
@@ -53,8 +64,10 @@
     new Vue({
         el: "#main",
         data: {
+            id: location.hash.slice(1) || 0,
             currentimage: 0,
             images: [],
+
             form: {
                 title: "",
                 description: "",
@@ -64,6 +77,9 @@
         },
         mounted: function() {
             var self = this;
+            window.addEventListener("hashchange", function() {
+                self.id = location.hash.slice(1);
+            });
             axios.get("/imageboard").then(function(res) {
                 self.images = res.data;
                 console.log("responded data", res.data);
@@ -74,6 +90,10 @@
             openModal: function(id) {
                 // console.log(id);
                 this.currentimage = id;
+            },
+            closeModal: function() {
+                this.id = null;
+                location.hash = "";
             },
             handleFileChange: function(evt) {
                 console.log("file: ", evt.target.files[0]);
